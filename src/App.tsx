@@ -1,7 +1,17 @@
+import { Container, ThemeProvider } from "@mui/material"
+import Navbar from "./components/Navbar"
+import { useState } from "react"
+import { darkTheme, lightTheme } from "./theme";
+
 function App() {
+    const [darkMode, setDarkMode] = useState<boolean>(false);
+
     return (
-        <div className="app">
-        </div>
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+            <Container>
+                <Navbar darkMode={darkMode} setDarkMode={setDarkMode}/>
+            </Container>
+        </ThemeProvider>
     )
 }
 

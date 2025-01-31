@@ -7,7 +7,7 @@ interface NavbarProps {
 
 function Navbar({ setDarkMode }: NavbarProps) {
     return (
-        <AppBar position="absolute">
+        <AppBar position="static">
             <Toolbar variant="regular" sx={{ columnGap: 2 }}>
                 <Typography variant="h4" fontWeight="bold" sx={{ flexGrow: 1 }}>
                     Pixel Crypt

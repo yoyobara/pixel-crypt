@@ -1,7 +1,6 @@
 import { Box, Container, Paper, Tab, Tabs, Typography } from "@mui/material";
 import React, { useState } from "react";
 import EncryptionTab from "./Tabs/EncryptionTab";
-import DecryptionTab from "./Tabs/DecryptionTab";
 
 export default function MainFrame() {
     const [currentTab, setCurrentTab] = useState<number>(0);
@@ -21,8 +20,8 @@ export default function MainFrame() {
                     </Tabs>
                 </Box>
             </Box>
-            <Paper sx={{marginY: "20px"}}>
-                {currentTab === 0 ?  <EncryptionTab/> : <DecryptionTab/>}
+            <Paper sx={{marginY: "20px", padding: "10px"}}>
+                {currentTab === 0 ?  <EncryptionTab/> : <EncryptionTab/>}
             </Paper>
         </Container>
     )

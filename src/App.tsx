@@ -1,4 +1,4 @@
-import { Container, ThemeProvider } from "@mui/material"
+import { ThemeProvider, Container, CssBaseline } from "@mui/material"
 import Navbar from "./components/Navbar"
 import { useState } from "react"
 import { darkTheme, lightTheme } from "./theme";
@@ -8,8 +8,9 @@ function App() {
 
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+            <CssBaseline/>
             <Container>
-                <Navbar darkMode={darkMode} setDarkMode={setDarkMode}/>
+                <Navbar setDarkMode={setDarkMode}/>
             </Container>
         </ThemeProvider>
     )

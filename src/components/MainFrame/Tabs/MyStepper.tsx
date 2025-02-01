@@ -7,7 +7,7 @@ interface MyStepperProps {
 
 export default function MyStepper({currentStep, stepTitles}: MyStepperProps) {
     return (
-        <Stepper activeStep={currentStep}>
+        <Stepper activeStep={currentStep} sx={{alignSelf: "stretch"}}>
             {
                 stepTitles.map((stepName) => <Step key={stepName}><StepLabel>{stepName}</StepLabel></Step>)
             }

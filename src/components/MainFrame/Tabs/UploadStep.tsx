@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
 interface UploadStepProps {
     selectedFile: File | null,
@@ -28,7 +28,7 @@ export default function UploadStep({selectedFile, setSelectedFile, gotoNext}: Up
                 </Button>
                 <Typography variant="h6" display="inline" color="info">{selectedFile?.name}</Typography>
             </Box>
-            <Button variant="text" onClick={gotoNext} sx={{alignSelf: "end"}}>Next</Button>
+            <Button disabled={selectedFile === null} variant="text" onClick={gotoNext} sx={{alignSelf: "end"}}>Next</Button>
         </>
     )
 }

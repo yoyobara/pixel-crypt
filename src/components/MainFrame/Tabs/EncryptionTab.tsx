@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MyStepper from "./MyStepper";
 import UploadStep from "./UploadStep";
+import PasswordStep from "./PasswordStep";
 
 const STEP_TITLES = [
     "Select file",
@@ -12,10 +13,13 @@ const STEP_TITLES = [
 export default function EncryptionTab() {
     const [currentStep, setCurrentStep] = useState<number>(0);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [selectedPassword, setSelectedPassword] = useState<string | null>(null);
+    const [selectedPassword, setSelectedPassword] = useState<string>("");
 
     const gotoNext = () => setCurrentStep(currentStep + 1);
     const gotoPrevious = () => setCurrentStep(currentStep - 1);
+    const go = () => {
+        console.log("Bruh");
+    }
 
     let stepContent;
     switch (currentStep) {
@@ -23,7 +27,7 @@ export default function EncryptionTab() {
         stepContent = <UploadStep selectedFile={selectedFile} setSelectedFile={setSelectedFile} gotoNext={gotoNext}/>
         break;
     case 1:
-        stepContent = <p>lvl2</p>
+        stepContent = <PasswordStep selectedPassword={selectedPassword} setSelectedPassword={setSelectedPassword} gotoPrevious={gotoPrevious} go={go}/>
         break;
     case 2:
         stepContent = <p>lvl3</p>

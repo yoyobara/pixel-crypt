@@ -11,16 +11,14 @@ export default function MainFrame() {
 
     return (
         <Container>
-            <Box display="flex" justifyContent="space-between">
+            <Box display="flex" justifyContent="space-between" alignItems="flex-end">
                 <Typography fontWeight={100} fontSize={60}>Welcome to<br/>PixelCrypt!</Typography>
-                <Box>
-                    <Tabs value={currentTab} onChange={handleTabChange} >
-                        <Tab label="Encrypt" sx={{fontSize: 50}}/>
-                        <Tab label="Decrypt" sx={{fontSize: 50}}/>
-                    </Tabs>
-                </Box>
+                <Tabs value={currentTab} onChange={handleTabChange}>
+                    <Tab label="Encrypt" sx={{fontSize: 50}}/>
+                    <Tab label="Decrypt" sx={{fontSize: 50}}/>
+                </Tabs>
             </Box>
-            <Paper sx={{display: "flex", flexDirection: "column", rowGap: "25px", marginY: "20px", padding: "10px 30px"}}>
+            <Paper sx={{display: "flex", flexDirection: "column", rowGap: "25px", marginY: "20px", padding: "10px 30px", alignItems: "start"}}>
                 {currentTab === 0 ?  <EncryptionTab/> : <EncryptionTab/>}
             </Paper>
         </Container>

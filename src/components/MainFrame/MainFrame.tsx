@@ -1,7 +1,6 @@
 import { Box, Container, Paper, Tab, Tabs, Typography } from "@mui/material";
 import React, { useState } from "react";
 import EncryptionTab from "./Tabs/EncryptionTab";
-import DecryptionTab from "./Tabs/DecryptionTab";
 
 export default function MainFrame() {
     const [currentTab, setCurrentTab] = useState<number>(0);
@@ -14,15 +13,13 @@ export default function MainFrame() {
         <Container>
             <Box display="flex" justifyContent="space-between" alignItems="flex-end">
                 <Typography fontWeight={100} fontSize={60}>Welcome to<br/>PixelCrypt!</Typography>
-                <Box>
-                    <Tabs value={currentTab} onChange={handleTabChange} >
-                        <Tab label="Encrypt" sx={{fontSize: 50}}/>
-                        <Tab label="Decrypt" sx={{fontSize: 50}}/>
-                    </Tabs>
-                </Box>
+                <Tabs value={currentTab} onChange={handleTabChange}>
+                    <Tab label="Encrypt" sx={{fontSize: 50}}/>
+                    <Tab label="Decrypt" sx={{fontSize: 50}}/>
+                </Tabs>
             </Box>
-            <Paper sx={{marginY: "20px"}}>
-                {currentTab === 0 ?  <EncryptionTab/> : <DecryptionTab/>}
+            <Paper sx={{display: "flex", flexDirection: "column", rowGap: "25px", marginY: "20px", padding: "10px 30px", alignItems: "start"}}>
+                {currentTab === 0 ?  <EncryptionTab/> : <EncryptionTab/>}
             </Paper>
         </Container>
     )

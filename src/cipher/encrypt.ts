@@ -1,4 +1,5 @@
 import { Jimp } from "jimp";
+import { deriveKey } from "./common";
 
 export function findClosestFactors(x: number): { m: number, n: number } {
     let m = Math.floor(Math.sqrt(x));
@@ -12,17 +13,6 @@ export function findClosestFactors(x: number): { m: number, n: number } {
     
     return { m, n };
 }
-
-/*
-to file data:
-	<4 byte filename length><filename><file data>
-
-cipher data structure:
-	<16 bytes IV><16 bytes salt><encrypted data length><encrypted data>
-
-image pixels:
-    <cipher data><padded pixels>
-*/
 
 async function toFileData(file: File): Promise<Uint8Array> {
     const fileData = new Uint8Array(await file.arrayBuffer());

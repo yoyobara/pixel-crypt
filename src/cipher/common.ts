@@ -1,5 +1,16 @@
 const ITERATIONS = 10000;
 
+/*
+file data structure:
+	<4 byte filename length><filename><file data>
+
+cipher data structure:
+	<16 bytes IV><16 bytes salt><encrypted file data length><encrypted file data>
+
+image pixels:
+    <cipher data><padded pixels>
+*/
+
 export async function deriveKey(password: string, salt: Uint8Array) {
     const encoder = new TextEncoder();
 

@@ -2,12 +2,13 @@ import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 
 interface UploadStepProps {
+    mode: "encrypt" | "decrypt"
     selectedFile: File | null,
     setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>,
     gotoNext: () => void
 }
 
-export default function UploadStep({selectedFile, setSelectedFile, gotoNext}: UploadStepProps) {
+export default function UploadStep({mode, selectedFile, setSelectedFile, gotoNext}: UploadStepProps) {
 
     const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files === null) {
@@ -20,7 +21,7 @@ export default function UploadStep({selectedFile, setSelectedFile, gotoNext}: Up
 
     return (
         <>
-            <Typography variant="h1">Upload your file</Typography>
+            <Typography variant="h1">Upload your {mode === "encrypt" ? "file to encrypt" : "PNG cipher to decrypt"}!</Typography>
             <Box sx={{display: "flex", columnGap: "10px"}}>
                 <Button component="label" variant="contained">
                     Choose File

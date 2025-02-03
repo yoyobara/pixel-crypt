@@ -1,26 +1,18 @@
-import { Box, Container, Paper, Tab, Tabs, Typography } from "@mui/material";
-import React, { useState } from "react";
-import EncryptionTab from "./Tabs/EncryptionTab";
+import { Box, Container, Typography } from "@mui/material";
+import { useState } from "react";
+import { ModeSelection } from "./ModeSelection";
+import { ActionPaper } from "./ActionPaper";
 
 export default function MainFrame() {
-    const [currentTab, setCurrentTab] = useState<number>(0);
-
-    const handleTabChange = (_event: React.SyntheticEvent, newTabValue: number) => {
-        setCurrentTab(newTabValue);
-    };
+    const [mode, setMode] = useState<"encrypt" | "decrypt">("encrypt");
 
     return (
         <Container>
             <Box display="flex" justifyContent="space-between" alignItems="flex-end">
                 <Typography fontWeight={100} fontSize={60}>Welcome to<br/>PixelCrypt!</Typography>
-                <Tabs value={currentTab} onChange={handleTabChange}>
-                    <Tab label="Encrypt" sx={{fontSize: 50}}/>
-                    <Tab label="Decrypt" sx={{fontSize: 50}}/>
-                </Tabs>
+                <ModeSelection mode={mode} setMode={setMode}/>
             </Box>
-            <Paper sx={{display: "flex", flexDirection: "column", rowGap: "25px", marginY: "20px", padding: "10px 30px", alignItems: "start"}}>
-                {currentTab === 0 ?  <EncryptionTab/> : <EncryptionTab/>}
-            </Paper>
+            <ActionPaper mode={mode}/>
         </Container>
     )
 }

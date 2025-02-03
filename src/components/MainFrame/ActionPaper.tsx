@@ -1,17 +1,10 @@
 import { useState } from "react";
-import MyStepper from "./MyStepper";
-import UploadStep from "./UploadStep";
-import PasswordStep from "./PasswordStep";
-import ProcessingStep from "./ProcessingStep";
-import { encrypt } from "../../../cipher";
-import { DownloadStep } from "./DownloadStep";
-
-const STEP_TITLES = [
-    "Select file",
-    "Choose password",
-    "File processing",
-    "Download PNG ciper"
-]
+import { encrypt } from "../../cipher";
+import { DownloadStep } from "./Tabs/DownloadStep";
+import PasswordStep from "./Tabs/PasswordStep";
+import ProcessingStep from "./Tabs/ProcessingStep";
+import UploadStep from "./Tabs/UploadStep";
+import { Paper, Step, StepLabel, Stepper } from "@mui/material";
 
 function downloadFile(file: Blob, filename: string) {
     const linkElement = document.createElement('a');
@@ -22,7 +15,11 @@ function downloadFile(file: Blob, filename: string) {
     linkElement.click();
 }
 
-export default function EncryptionTab() {
+interface ActionPaperProps {
+	mode: "encrypt" | "decrypt"
+}
+
+export function ActionPaper({mode}: ActionPaperProps) {
     const [currentStep, setCurrentStep] = useState<number>(0);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [selectedPassword, setSelectedPassword] = useState<string>("");
@@ -44,7 +41,7 @@ export default function EncryptionTab() {
     let stepContent;
     switch (currentStep) {
     case 0:
-        stepContent = <UploadStep selectedFile={selectedFile} setSelectedFile={setSelectedFile} gotoNext={gotoNext}/>
+        stepContent = <UploadStep mode={mode} selectedFile={selectedFile} setSelectedFile={setSelectedFile} gotoNext={gotoNext}/>
         break;
     case 1:
         stepContent = <PasswordStep selectedPassword={selectedPassword} setSelectedPassword={setSelectedPassword} gotoPrevious={gotoPrevious} go={go}/>
@@ -58,9 +55,15 @@ export default function EncryptionTab() {
     }
 
     return (
-        <>
-            <MyStepper currentStep={currentStep} stepTitles={STEP_TITLES}/>
+        <Paper sx={{display: "flex", flexDirection: "column", rowGap: "25px", marginY: "20px", padding: "10px 30px", alignItems: "start"}}>
+            <Stepper activeStep={currentStep} sx={{alignSelf: "stretch"}}>
+                <Step><StepLabel>Upload</StepLabel></Step>
+                <Step><StepLabel>Choose Password</StepLabel></Step>
+                <Step><StepLabel>Processing</StepLabel></Step>
+                <Step><StepLabel>Finish</StepLabel></Step>
+            </Stepper>
             {stepContent}
-        </>
+        </Paper>
     )
+	
 }

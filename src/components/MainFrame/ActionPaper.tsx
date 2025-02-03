@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { encrypt } from "../../cipher";
-import { DownloadStep } from "./Tabs/DownloadStep";
-import PasswordStep from "./Tabs/PasswordStep";
-import ProcessingStep from "./Tabs/ProcessingStep";
-import UploadStep from "./Tabs/UploadStep";
+import { DownloadStep } from "./Steps/DownloadStep";
+import PasswordStep from "./Steps/PasswordStep";
+import ProcessingStep from "./Steps/ProcessingStep";
+import UploadStep from "./Steps/UploadStep";
 import { Paper, Step, StepLabel, Stepper } from "@mui/material";
 
 function downloadFile(file: Blob, filename: string) {
@@ -47,10 +47,10 @@ export function ActionPaper({mode}: ActionPaperProps) {
         stepContent = <PasswordStep selectedPassword={selectedPassword} setSelectedPassword={setSelectedPassword} gotoPrevious={gotoPrevious} go={go}/>
         break;
     case 2:
-        stepContent = <ProcessingStep loading={loading}/>
+        stepContent = <ProcessingStep mode={mode} loading={loading}/>
         break;
     case 3:
-        stepContent = <DownloadStep/>
+        stepContent = <DownloadStep mode={mode}/>
         break;
     }
 

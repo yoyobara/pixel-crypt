@@ -12,7 +12,7 @@ export default function MainFrame() {
                 <Typography fontWeight={100} fontSize={60}>Welcome to<br/>PixelCrypt!</Typography>
                 <ModeSelection mode={mode} setMode={setMode}/>
             </Box>
-            <ActionPaper mode={mode}/>
+            <ActionPaper key={mode} mode={mode}/>
         </Container>
     )
 }

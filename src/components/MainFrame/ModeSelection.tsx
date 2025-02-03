@@ -10,8 +10,10 @@ interface ModeSelectionProps {
 
 export function ModeSelection({mode, setMode}: ModeSelectionProps) {
 
-    const handleChange = (_event: React.MouseEvent<HTMLElement>, newMode: ModeType) => {
-        setMode(newMode);
+    const handleChange = (_event: React.MouseEvent<HTMLElement>, newMode: ModeType | null) => {
+        if (newMode) {
+            setMode(newMode);
+        }
     }
 
     return (
@@ -19,7 +21,6 @@ export function ModeSelection({mode, setMode}: ModeSelectionProps) {
             value={mode}
             exclusive
             onChange={handleChange}
-            aria-label="text alignment"
         >
             <ToggleButton value="encrypt">
 				Encrypt

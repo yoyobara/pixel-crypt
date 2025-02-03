@@ -25,7 +25,7 @@ export default function UploadStep({mode, selectedFile, setSelectedFile, gotoNex
             <Box sx={{display: "flex", columnGap: "10px"}}>
                 <Button component="label" variant="contained">
                     Choose File
-                    <input type="file" hidden onChange={handleFileUpload}/>
+                    <input type="file" accept={mode === "decrypt" ? ".png" : ""} hidden onChange={handleFileUpload}/>
                 </Button>
                 <Typography variant="h6" display="inline" color="info">{selectedFile?.name}</Typography>
             </Box>

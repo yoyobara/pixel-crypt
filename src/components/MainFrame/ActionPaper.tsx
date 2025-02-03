@@ -23,6 +23,7 @@ export function ActionPaper({mode}: ActionPaperProps) {
     const [currentStep, setCurrentStep] = useState<number>(0);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [selectedPassword, setSelectedPassword] = useState<string>("");
+    const [passwordError, setPasswordError] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
 
     const gotoNext = () => setCurrentStep(currentStep + 1);
@@ -42,12 +43,18 @@ export function ActionPaper({mode}: ActionPaperProps) {
     const decryption = async () => {
         setCurrentStep(2);
 
-        const originalFile = await decrypt(selectedFile!, selectedPassword);
-        setLoading(false);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        try {
+            const originalFile = await decrypt(selectedFile!, selectedPassword);
+            setLoading(false);
+            await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        setCurrentStep(3);
-        downloadFile(originalFile, originalFile.name);
+            setCurrentStep(3);
+            downloadFile(originalFile, originalFile.name);
+        } catch (error) {
+            setCurrentStep(1);
+            console.error(error);
+            setPasswordError(true);
+        }
     }
 
     let stepContent;
@@ -56,7 +63,7 @@ export function ActionPaper({mode}: ActionPaperProps) {
         stepContent = <UploadStep mode={mode} selectedFile={selectedFile} setSelectedFile={setSelectedFile} gotoNext={gotoNext}/>
         break;
     case 1:
-        stepContent = <PasswordStep selectedPassword={selectedPassword} setSelectedPassword={setSelectedPassword} gotoPrevious={gotoPrevious} go={mode === "encrypt" ? encryption : decryption}/>
+        stepContent = <PasswordStep selectedPassword={selectedPassword} setSelectedPassword={setSelectedPassword} passwordError={passwordError} gotoPrevious={gotoPrevious} go={mode === "encrypt" ? encryption : decryption}/>
         break;
     case 2:
         stepContent = <ProcessingStep mode={mode} loading={loading}/>

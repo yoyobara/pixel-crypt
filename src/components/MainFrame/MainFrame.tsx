@@ -7,9 +7,9 @@ export default function MainFrame() {
     const [mode, setMode] = useState<"encrypt" | "decrypt">("encrypt");
 
     return (
-        <Container>
+        <Container maxWidth="xl">
             <Box display="flex" justifyContent="space-between" alignItems="flex-end">
-                <Typography fontWeight={100} fontSize={60}>Welcome to<br/>PixelCrypt!</Typography>
+                <Typography fontWeight={100} fontSize={100}>Welcome to<br/>PixelCrypt!</Typography>
                 <ModeSelection mode={mode} setMode={setMode}/>
             </Box>
             <ActionPaper key={mode} mode={mode}/>

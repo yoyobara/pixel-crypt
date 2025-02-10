@@ -14,6 +14,7 @@ jobs:
 
       - name: Stop and remove existing container (if running)
         run: |
+          whoami
           docker stop my-server-container || true
           docker rm my-server-container || true
 

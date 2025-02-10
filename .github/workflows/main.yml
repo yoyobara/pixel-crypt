@@ -1,0 +1,23 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Stop and remove existing container (if running)
+        run: |
+          docker stop my-server-container || true
+          docker rm my-server-container || true
+
+      - name: Build and run new container
+        run: |
+          docker build -t my-server-image:latest .
+          docker run -d --name my-server-container -p 80:80 my-server-image:latest

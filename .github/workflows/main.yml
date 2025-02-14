@@ -20,5 +20,5 @@ jobs:
 
       - name: Build and run new container
         run: |
-          docker build -t my-server-image:latest .
-          docker run -d --name my-server-container -p 80:80 my-server-image:latest
+          docker build -t pixel-crypt-img:latest .
+          docker run -d --name pixel-crypt -p 80:80 my-server-image:latest

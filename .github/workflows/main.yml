@@ -15,10 +15,10 @@ jobs:
       - name: Stop and remove existing container (if running)
         run: |
           whoami
-          docker stop my-server-container || true
-          docker rm my-server-container || true
+          docker stop pixel-crypt || true
+          docker rm pixel-crypt || true
 
       - name: Build and run new container
         run: |
           docker build -t pixel-crypt-img:latest .
-          docker run -d --name pixel-crypt -p 80:80 my-server-image:latest
+          docker run -d --name pixel-crypt -p 80:80 pixel-crypt-img:latest

@@ -1,6 +1,6 @@
-import { ThemeProvider, CssBaseline } from "@mui/material"
-import Navbar from "./components/Navbar"
-import { useState } from "react"
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import Navbar from "./components/Navbar";
+import { useState } from "react";
 import { darkTheme, lightTheme } from "./theme";
 import MainFrame from "./components/MainFrame/MainFrame";
 
@@ -9,11 +9,11 @@ function App() {
 
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-            <CssBaseline/>
-            <Navbar setDarkMode={setDarkMode}/>
-            <MainFrame/>
+            <CssBaseline />
+            <Navbar setDarkMode={setDarkMode} />
+            <MainFrame />
         </ThemeProvider>
-    )
+    );
 }
 
-export default App
+export default App;

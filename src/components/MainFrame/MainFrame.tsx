@@ -8,11 +8,19 @@ export default function MainFrame() {
 
     return (
         <Container maxWidth="xl">
-            <Box display="flex" justifyContent="space-between" alignItems="flex-end">
-                <Typography fontWeight={100} fontSize={100}>Welcome to<br/>PixelCrypt!</Typography>
-                <ModeSelection mode={mode} setMode={setMode}/>
+            <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="flex-end"
+            >
+                <Typography fontWeight={100} fontSize={100}>
+                    Welcome to
+                    <br />
+                    PixelCrypt!
+                </Typography>
+                <ModeSelection mode={mode} setMode={setMode} />
             </Box>
-            <ActionPaper key={mode} mode={mode}/>
+            <ActionPaper key={mode} mode={mode} />
         </Container>
-    )
+    );
 }

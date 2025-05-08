@@ -12,16 +12,23 @@ async function toPaddedCipherData(pngCipher: Blob): Promise<Uint8Array> {
 async function toFileData(paddedCipherData: Uint8Array, password: string) {
     const iv = paddedCipherData.slice(0, 16);
     const salt = paddedCipherData.slice(16, 32);
-    const encryptedFileDataLength = new DataView(paddedCipherData.buffer).getUint32(32, true);
-    const encryptedFileData = paddedCipherData.slice(36, 36 + encryptedFileDataLength);
+    const encryptedFileDataLength = new DataView(
+        paddedCipherData.buffer,
+    ).getUint32(32, true);
+    const encryptedFileData = paddedCipherData.slice(
+        36,
+        36 + encryptedFileDataLength,
+    );
 
     const key = await deriveKey(password, salt);
 
-    const fileData = new Uint8Array(await window.crypto.subtle.decrypt(
-        {name: "AES-GCM", iv},
-        key,
-        encryptedFileData
-    ));
+    const fileData = new Uint8Array(
+        await window.crypto.subtle.decrypt(
+            { name: "AES-GCM", iv },
+            key,
+            encryptedFileData,
+        ),
+    );
 
     return fileData;
 }
@@ -36,7 +43,10 @@ async function toFile(fileData: Uint8Array): Promise<File> {
     return new File([fileContent], filename);
 }
 
-export async function decrypt(pngCipher: Blob, password: string): Promise<File> {
+export async function decrypt(
+    pngCipher: Blob,
+    password: string,
+): Promise<File> {
     const paddedCipherData = await toPaddedCipherData(pngCipher);
     const fileData = await toFileData(paddedCipherData, password);
     const originalFile = await toFile(fileData);

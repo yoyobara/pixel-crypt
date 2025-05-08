@@ -17,9 +17,9 @@ export async function deriveKey(password: string, salt: Uint8Array) {
     const importedPassword = await window.crypto.subtle.importKey(
         "raw",
         encoder.encode(password),
-        {name: "PBKDF2"},
+        { name: "PBKDF2" },
         false,
-        ["deriveKey"]
+        ["deriveKey"],
     );
 
     const key = await window.crypto.subtle.deriveKey(
@@ -27,12 +27,12 @@ export async function deriveKey(password: string, salt: Uint8Array) {
             name: "PBKDF2",
             salt,
             iterations: ITERATIONS,
-            hash: "SHA-256"
+            hash: "SHA-256",
         },
         importedPassword,
-        {name: "AES-GCM", length: 256},
+        { name: "AES-GCM", length: 256 },
         false,
-        ["encrypt", "decrypt"]
+        ["encrypt", "decrypt"],
     );
 
     return key;

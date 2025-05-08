@@ -7,19 +7,19 @@ import UploadStep from "./Steps/UploadStep";
 import { Paper, Step, StepLabel, Stepper } from "@mui/material";
 
 function downloadFile(file: Blob, filename: string) {
-    const linkElement = document.createElement('a');
+    const linkElement = document.createElement("a");
 
     linkElement.href = URL.createObjectURL(file);
     linkElement.download = filename;
-    
+
     linkElement.click();
 }
 
 interface ActionPaperProps {
-	mode: "encrypt" | "decrypt"
+    mode: "encrypt" | "decrypt";
 }
 
-export function ActionPaper({mode}: ActionPaperProps) {
+export function ActionPaper({ mode }: ActionPaperProps) {
     const [currentStep, setCurrentStep] = useState<number>(0);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [selectedPassword, setSelectedPassword] = useState<string>("");
@@ -38,7 +38,7 @@ export function ActionPaper({mode}: ActionPaperProps) {
 
         setCurrentStep(3);
         downloadFile(pngCipher, "cipher.png");
-    }
+    };
 
     const decryption = async () => {
         setCurrentStep(2);
@@ -55,34 +55,65 @@ export function ActionPaper({mode}: ActionPaperProps) {
             console.error(error);
             setPasswordError(true);
         }
-    }
+    };
 
     let stepContent;
     switch (currentStep) {
-    case 0:
-        stepContent = <UploadStep mode={mode} selectedFile={selectedFile} setSelectedFile={setSelectedFile} gotoNext={gotoNext}/>
-        break;
-    case 1:
-        stepContent = <PasswordStep selectedPassword={selectedPassword} setSelectedPassword={setSelectedPassword} passwordError={passwordError} gotoPrevious={gotoPrevious} go={mode === "encrypt" ? encryption : decryption}/>
-        break;
-    case 2:
-        stepContent = <ProcessingStep mode={mode} loading={loading}/>
-        break;
-    case 3:
-        stepContent = <DownloadStep mode={mode}/>
-        break;
+        case 0:
+            stepContent = (
+                <UploadStep
+                    mode={mode}
+                    selectedFile={selectedFile}
+                    setSelectedFile={setSelectedFile}
+                    gotoNext={gotoNext}
+                />
+            );
+            break;
+        case 1:
+            stepContent = (
+                <PasswordStep
+                    selectedPassword={selectedPassword}
+                    setSelectedPassword={setSelectedPassword}
+                    passwordError={passwordError}
+                    gotoPrevious={gotoPrevious}
+                    go={mode === "encrypt" ? encryption : decryption}
+                />
+            );
+            break;
+        case 2:
+            stepContent = <ProcessingStep mode={mode} loading={loading} />;
+            break;
+        case 3:
+            stepContent = <DownloadStep mode={mode} />;
+            break;
     }
 
     return (
-        <Paper sx={{display: "flex", flexDirection: "column", rowGap: "25px", marginY: "20px", padding: "10px 30px", alignItems: "start"}}>
-            <Stepper activeStep={currentStep} sx={{alignSelf: "stretch"}}>
-                <Step><StepLabel>Upload</StepLabel></Step>
-                <Step><StepLabel>Choose Password</StepLabel></Step>
-                <Step><StepLabel>Processing</StepLabel></Step>
-                <Step><StepLabel>Finish</StepLabel></Step>
+        <Paper
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: "25px",
+                marginY: "20px",
+                padding: "10px 30px",
+                alignItems: "start",
+            }}
+        >
+            <Stepper activeStep={currentStep} sx={{ alignSelf: "stretch" }}>
+                <Step>
+                    <StepLabel>Upload</StepLabel>
+                </Step>
+                <Step>
+                    <StepLabel>Choose Password</StepLabel>
+                </Step>
+                <Step>
+                    <StepLabel>Processing</StepLabel>
+                </Step>
+                <Step>
+                    <StepLabel>Finish</StepLabel>
+                </Step>
             </Stepper>
             {stepContent}
         </Paper>
-    )
-	
+    );
 }

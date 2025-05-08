@@ -2,7 +2,7 @@ import { AppBar, Button, Toolbar, Typography, useTheme } from "@mui/material";
 import DarkModeToggle from "react-dark-mode-toggle";
 
 interface NavbarProps {
-    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
+    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Navbar({ setDarkMode }: NavbarProps) {
@@ -19,7 +19,6 @@ function Navbar({ setDarkMode }: NavbarProps) {
                     size={60}
                     speed={3}
                 />
-
             </Toolbar>
         </AppBar>
     );

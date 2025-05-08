@@ -15,7 +15,7 @@ const baseTheme = {
             fontSize: "1rem",
         },
     },
-}
+};
 
 export const lightTheme = createTheme({
     palette: {
@@ -27,7 +27,7 @@ export const lightTheme = createTheme({
             paper: "#ffffff",
         },
     },
-    ...baseTheme
+    ...baseTheme,
 });
 
 export const darkTheme = createTheme({
@@ -40,5 +40,5 @@ export const darkTheme = createTheme({
             paper: "#1d1d1d",
         },
     },
-    ...baseTheme
+    ...baseTheme,
 });

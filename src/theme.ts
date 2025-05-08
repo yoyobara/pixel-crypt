@@ -1,8 +1,11 @@
-import { createTheme } from "@mui/material";
+import { createTheme, ThemeOptions } from "@mui/material";
 
-const baseTheme = {
+const baseTheme: ThemeOptions = {
     typography: {
         fontFamily: "Rubik",
+        allVariants: {
+            fontSize: "1.5rem",
+        },
         h1: {
             fontSize: "2.5rem",
             fontWeight: 500,
